@@ -5,7 +5,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -17,12 +17,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    MaterialModule
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    MaterialModule
   ]
 })
 export class SharedModule { }

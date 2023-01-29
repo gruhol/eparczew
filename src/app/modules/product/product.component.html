@@ -1,1 +1,11 @@
-<p>product works!</p>
+<h1>Produkty</h1>
+<mat-card *ngFor="let product of product">
+    <mat-card-header>
+      <mat-card-title>{{product.name}}</mat-card-title>
+      <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button>Pokaż</button>
+      <button mat-button>Do koszyka</button>
+    </mat-card-actions>
+  </mat-card>
