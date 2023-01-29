@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DefaultModule } from './layouts/default/default.module';
 import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { AdminpageModule } from './layouts/adminpage/adminpage.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AdminpageModule } from './layouts/adminpage/adminpage.module';
     AppRoutingModule,
     DefaultModule,
     FullpageModule,
-    AdminpageModule
+    AdminpageModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
