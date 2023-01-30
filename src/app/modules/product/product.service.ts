@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from './model/product';
 
 @Injectable({
@@ -6,30 +8,9 @@ import { Product } from './model/product';
 })
 export class ProductService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
-  getProducts(): Product[] {
-    return [
-      {
-        name: "Banan",
-        category: "Owoce"
-      },
-      {
-        name: "Jabłko",
-        category: "Owoce"
-      },
-      {
-        name: "Śliwka",
-        category: "Owoce"
-      },
-      {
-        name: "Gruszka",
-        category: "Owoce"
-      },
-      {
-        name: "Morela",
-        category: "Owoce"
-      }
-    ]
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>("/api/products");
   }
 }

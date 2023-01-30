@@ -17,6 +17,8 @@ export class ProductComponent {
   }
 
   getProducts() {
-    this.product = this.productService.getProducts();
+    this.productService
+      .getProducts()
+      .subscribe(pp => this.product = pp);
   }
 }
