@@ -1,4 +1,4 @@
 export interface Product {
-    name: string,
-    category: string
+    productName: string,
+    idBrand: number
 }
