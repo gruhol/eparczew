@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminComponent } from 'src/app/modules/admin/admin.component';
 import { AdminpageComponent } from './adminpage.component';
 import { AdminProductsComponent } from 'src/app/modules/admin/admin-products/admin-products.component';
+import { AdminProductUpdateComponent } from 'src/app/modules/admin/admin-product-update/admin-product-update.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,13 +15,15 @@ import { AdminProductsComponent } from 'src/app/modules/admin/admin-products/adm
   declarations: [
     AdminComponent,
     AdminpageComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    AdminProductUpdateComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminpageModule { }
