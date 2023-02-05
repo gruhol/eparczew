@@ -8,10 +8,9 @@ import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { AdminpageModule } from './layouts/adminpage/adminpage.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
