@@ -1,0 +1,8 @@
+<div *ngIf="messages.length > 0">
+    <div *ngFor="let message of messages" class="alert alert-danger" role="alert">
+        {{message}}
+        <button  type="button" class="close" data-dismiss="alert" aria-label="Close" mat-icon-button class="clearMassage" (click)="clearMessages()">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+</div>

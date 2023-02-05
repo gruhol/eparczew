@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { AdminMessageService } from '../admin-message.service';
 import { AdminProductUpdateService } from './admin-product-update.service';
 import { AdminProductUpdate } from './adminProductUpdate';
 
@@ -19,14 +20,16 @@ export class AdminProductUpdateComponent implements OnInit {
     private router: ActivatedRoute,
     private service: AdminProductUpdateService,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar
-    ) {}
+    private snackBar: MatSnackBar,
+    private adminMessageService: AdminMessageService
+
+  ) {}
 
   ngOnInit(): void {
     this.getProduct();
     this.productForm = this.formBuilder.group({
-      productName: [''],
-      idBrand: [''],
+      productName: ['', [Validators.required, Validators.minLength(3)]],
+      idBrand: ['', [Validators.required]],
     });
   }
 
@@ -43,9 +46,12 @@ export class AdminProductUpdateComponent implements OnInit {
       productName: this.productForm.get('productName')?.value,
       idBrand: this.productForm.get('idBrand')?.value
     } as AdminProductUpdate)
-    .subscribe(product => {
+    .subscribe({
+      next: product => {
       this.mapFormValues(product);
       this.snackBar.open("Zapisano", '', {duration: 3000});
+      },
+      error: err => this.adminMessageService.addSpringErrors(err.errors)
     });
   }
 
