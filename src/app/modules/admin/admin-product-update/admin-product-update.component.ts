@@ -15,6 +15,9 @@ export class AdminProductUpdateComponent implements OnInit {
   
   product!: AdminProductUpdate;
   productForm!: FormGroup;
+  requiredFileTypes = "image/jpeg, image/png";
+  imageForm!: FormGroup;
+  image: string | null = null;
 
   constructor(
     private router: ActivatedRoute,
@@ -30,7 +33,13 @@ export class AdminProductUpdateComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       productName: ['', [Validators.required, Validators.minLength(3)]],
       idBrand: ['', [Validators.required]],
+      image: [''],
+      slug: ['', [Validators.required]]
     });
+
+    this.imageForm = this.formBuilder.group({
+      file: ['']
+    })
   }
 
   getProduct() {
@@ -44,7 +53,9 @@ export class AdminProductUpdateComponent implements OnInit {
     let id = Number(this.router.snapshot.params['idProduct']);
     this.service.saveProduct(id, {
       productName: this.productForm.get('productName')?.value,
-      idBrand: this.productForm.get('idBrand')?.value
+      idBrand: this.productForm.get('idBrand')?.value,
+      image: this.image,
+      slug: this.productForm.get('slug')?.value
     } as AdminProductUpdate)
     .subscribe({
       next: product => {
@@ -55,11 +66,30 @@ export class AdminProductUpdateComponent implements OnInit {
     });
   }
 
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+    this.service.uploadImage(formData)
+      .subscribe(result => this.image = result.filename);
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      })
+    }
+  }
+
+
   private mapFormValues(product: AdminProductUpdate): void {
-    return this.productForm.setValue({
+    this.productForm.setValue({
       productName: product.productName,
-      idBrand: product.idBrand
+      idBrand: product.idBrand,
+      image: this.image,
+      slug: product.slug
     });
+    this.image = product.image;
   }
 
 }

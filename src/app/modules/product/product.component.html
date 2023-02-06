@@ -5,7 +5,7 @@
       <mat-card-subtitle>{{product.idBrand}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
-      <button mat-button>Pokaż</button>
+      <button routerLink="{{'/product/' + product.slug}}" mat-button>Pokaż</button>
       <button mat-button>Do koszyka</button>
     </mat-card-actions>
   </mat-card>

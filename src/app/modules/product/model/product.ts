@@ -1,4 +1,5 @@
 export interface Product {
     productName: string,
-    idBrand: number
+    idBrand: number,
+    slug: string
 }

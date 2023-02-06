@@ -1,3 +1,10 @@
 <form class="form-group" [formGroup]="productForm" (submit)="submit()">
     <app-admin-product-form [parentForm]="productForm"></app-admin-product-form>
 </form>
+
+<img *ngIf="image" src="{{'/api/data/productImage/' + image}}" width="200px">
+
+<form class="mt-5" [formGroup]="imageForm" (submit)="uploadFile()">
+    <input type="file" [accept]="requiredFileTypes" (change)="onFileChange($event)">
+    <button mat-flat-button color="basic">Upload</button>
+</form>

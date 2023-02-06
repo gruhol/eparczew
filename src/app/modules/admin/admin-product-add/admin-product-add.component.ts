@@ -26,6 +26,7 @@ export class AdminProductAddComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       productName: ['', [Validators.required, Validators.minLength(3)]],
       idBrand: ['', [Validators.required]],
+      slug: ['', [Validators.required]]
     });
   }
 

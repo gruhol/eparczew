@@ -30,7 +30,20 @@ import { FormGroup } from "@angular/forms";
                 </div>
             </div>
             </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field class="example-full-width">
+                <mat-label>Przyjazny URL</mat-label>
+                <input matInput placeholder="Podaj url" formControlName="slug">
+                <div *ngIf="slug?.invalid && (slug?.dirty || slug?.touched)">
+                <div *ngIf="slug?.errors?.['required']">
+                    Nazwa jest wymagana
+                </div>
             </div>
+            </mat-form-field>
+        </div>
+
         <div>
             <button mat-flat-button color="primary" [disabled]="!parentForm.valid">Zapisz</button>
         </div>
@@ -51,6 +64,10 @@ export class AdminProductFormComponent implements OnInit{
 
     get idBrand() {
         return this.parentForm.get("idBrand");
+    }
+
+    get slug() {
+        return this.parentForm.get('slug');
     }
 
 }

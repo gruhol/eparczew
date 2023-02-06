@@ -1,0 +1,16 @@
+<div>
+    <div>
+        <div>
+            <img *ngIf="!product.image" src="/assets/image-placeholder.png" width="350">
+            <img *ngIf="product.image" src="{{'/api/data/productImages/' + product?.image}}"  width="350">
+        </div>
+        <div>
+            <h1>{{product?.productName}}</h1>
+            <small>kategoria</small>
+            <div class="description">
+                {{product?.idBrand}}
+            </div>
+            <button mat-flat-button color="warn">Do koszyka</button>
+        </div>
+    </div>
+</div>
