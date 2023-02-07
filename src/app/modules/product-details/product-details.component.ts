@@ -25,7 +25,7 @@ export class ProductDetailsComponent implements OnInit {
   getProductDetails() {
     let slug = this.router.snapshot.params['slug'];
     this.service.getProductDetails(slug)
-      .subscribe(product => this.product = this.product);
+      .subscribe(product => this.product = product);
   }
 
 }
