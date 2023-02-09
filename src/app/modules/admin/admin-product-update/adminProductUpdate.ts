@@ -4,4 +4,5 @@ export interface AdminProductUpdate {
     idBrand: number,
     image: string,
     slug: string
+    categoryId: number
 }

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { AdminCategoryNameDto } from "./adminCategoryNameDto";
+import { FormCategoryService } from "./form-category.service";
 
 @Component({
     selector: 'app-admin-product-form',
@@ -44,6 +46,23 @@ import { FormGroup } from "@angular/forms";
             </mat-form-field>
         </div>
 
+        <div class="form-group"> 
+            <mat-form-field appearance="fill">
+                <mat-label>Kategoria</mat-label>
+                <mat-select formControlName="categoryId">
+                    <mat-option *ngFor="let el of categories" [value]="el.id">
+                    {{el.name}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="categoryId?.invalid && (categoryId?.dirty || categoryId?.touched)">
+                    <div *ngIf="categoryId?.errors?.['required']">
+                        Nazwa jest wymagana
+                    </div>
+                </div>
+            </mat-form-field>
+        </div>
+
+
         <div>
             <button mat-flat-button color="primary" [disabled]="!parentForm.valid">Zapisz</button>
         </div>
@@ -54,8 +73,17 @@ import { FormGroup } from "@angular/forms";
 export class AdminProductFormComponent implements OnInit{
     
     @Input() parentForm! : FormGroup;
+    categories: Array<AdminCategoryNameDto> = [];
+
+    constructor(private formCategoryService: FormCategoryService) {}
 
     ngOnInit(): void {
+        this.getCategories();
+    }
+
+    getCategories() {
+        this.formCategoryService.getCategories()
+        .subscribe(categories => this.categories = categories);
     }
 
     get productName() {
@@ -68,6 +96,10 @@ export class AdminProductFormComponent implements OnInit{
 
     get slug() {
         return this.parentForm.get('slug');
+    }
+
+    get categoryId() {
+        return this.parentForm.get('categoryId');
     }
 
 }
