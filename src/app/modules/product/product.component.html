@@ -1,14 +1,14 @@
 <h1>Produkty</h1>
 <mat-card *ngFor="let product of page?.content">
-    <mat-card-header>
-      <mat-card-title>{{product.productName}}</mat-card-title>
-      <mat-card-subtitle>{{product.idBrand}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-      <button routerLink="{{'/product/' + product.slug}}" mat-button>Pokaż</button>
-      <button mat-button>Do koszyka</button>
-    </mat-card-actions>
-  </mat-card>
+  <mat-card-header>
+    <mat-card-title>{{product.productName}}</mat-card-title>
+    <mat-card-subtitle>{{product.idBrand}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <button routerLink="{{'/product/' + product.slug}}" mat-button>Pokaż</button>
+    <button mat-button>Do koszyka</button>
+  </mat-card-actions>
+</mat-card>
 
   <mat-paginator *ngIf="page && page.totalElements > 0"
               [length]="page.totalElements"
