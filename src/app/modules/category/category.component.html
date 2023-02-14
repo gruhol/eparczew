@@ -1,1 +1,20 @@
-<p>category works!</p>
+<h1>Kasteogria: {{categoryProducts.category.name}}</h1>
+<p>{{categoryProducts.category.description}}</p>
+<mat-card *ngFor="let product of categoryProducts.products.content">
+  <mat-card-header>
+    <mat-card-title>{{product.productName}}</mat-card-title>
+    <mat-card-subtitle>{{product.idBrand}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <button routerLink="{{'/product/' + product.slug}}" mat-button>Pokaż</button>
+    <button mat-button>Do koszyka</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-paginator *ngIf="categoryProducts.products && categoryProducts.products.totalElements > 0"
+  [length]="categoryProducts.products.totalElements"
+  [pageSize]="10"
+  [pageSizeOptions]="[10, 25, 50]"
+  aria-label="Select page"
+  (page)="onPageEvent($event)">
+</mat-paginator>
