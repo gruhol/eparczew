@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetails } from './model/productDetails';
 import { Review } from './model/review';
@@ -18,15 +19,16 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private service: ProductDetailsService,
     private router: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
 
   }
   ngOnInit(): void {
     this.getProductDetails();
     this.reviewForm = this.formBuilder.group({
-      authorName: ["", Validators.required, Validators.minLength(2)],
-      content: ["", Validators.required, Validators.minLength(2)],
+      authorName: ["", [Validators.required, Validators.minLength(2)]],
+      content: ["", [Validators.required, Validators.minLength(2)]],
     })
   }
 
@@ -42,8 +44,11 @@ export class ProductDetailsComponent implements OnInit {
       this.service.saveProductReview({
         authorName: this.reviewForm.get("authorName")?.value,
         content: this.reviewForm.get("content")?.value,
-        productId: this.product.id,
-      } as Review).subscribe();
+        productId: this.product.idProduct
+      } as Review).subscribe(review => {
+        this.reviewForm.reset();
+        this.snackBar.open("Dziękujemy za dodanie opinii",'', {duration: 3000})
+      });
     }
   }
 

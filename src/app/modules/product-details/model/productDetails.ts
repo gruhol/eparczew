@@ -1,8 +1,10 @@
+import { Review } from "./review";
+
 export interface ProductDetails {
-    
-    id: number,
+    idProduct: number,
     productName: string,
     idBrand: number,
     image: string,
-    slug: string
+    slug: string,
+    reviews: Array<Review>
 }

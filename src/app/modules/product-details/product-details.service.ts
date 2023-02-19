@@ -16,7 +16,7 @@ export class ProductDetailsService {
   }
 
   saveProductReview(review: Review): Observable<Review> {
-    return this.http.post<Review>("/ap/review", review)
+    return this.http.post<Review>("/api/review", review)
   }
 
 

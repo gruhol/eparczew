@@ -6,6 +6,7 @@
         </div>
         <div>
             <h1>{{product.productName}}</h1>
+            <h2>{{product.idProduct}}</h2>
             <small>kategoria</small>
             <div class="description">
                 {{product.idBrand}}
@@ -17,6 +18,13 @@
 <hr>
 <div>
     <H2>Opinie o produkcie:</H2>
+
+    <div>
+        <div *ngFor="let review of product?.reviews">
+            <div>Autor: {{review.authorName}}</div>
+            <div>{{review.content}}</div>
+        </div>
+    </div>
 
     <form [formGroup]="reviewForm" (submit)="submit()">
         <div>
