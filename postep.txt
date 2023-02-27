@@ -1,3 +1,3 @@
-https://kursy.nullpointerexception.pl/kurs-aplikacji/modul-4-kategorie-produktow-relacje-one-to-many/mapowanie-encji-do-dto-kiedy-potrzebne-problem-n1/
+https://kursy.nullpointerexception.pl/kurs-aplikacji/modul-5-koszyk/strona-koszyka-dodawanie-do-koszyka/
 
-00:00
+21:06
