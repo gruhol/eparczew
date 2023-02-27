@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AdminCategoryNameDto } from '../admin-product-form/adminCategoryNameDto';
+import { AdminCategoryNameDto } from '../admin-product/admin-product-form/adminCategoryNameDto';
 import { AdminCategory } from './model/adminCategory';
 
 @Injectable({

@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { AdminConfirmDialogService } from '../admin-confirm-dialog.service';
-import { AdminConfirmDialogComponent } from '../admin-confirm-dialog/admin-confirm-dialog.component';
-import { AdminCategoryNameDto } from '../admin-product-form/adminCategoryNameDto';
+import { AdminCategoryNameDto } from '../admin-product/admin-product-form/adminCategoryNameDto';
+import { AdminConfirmDialogService } from '../common/service/admin-confirm-dialog.service';
 import { AdminCategoryService } from './admin-category.service';
 
 @Component({
