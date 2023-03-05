@@ -9,9 +9,10 @@
             <h2>{{product.idProduct}}</h2>
             <small>kategoria</small>
             <div class="description">
-                {{product.idBrand}}
+                Id brand to: {{product.idBrand}}
             </div>
-            <button mat-flat-button color="warn">Do koszyka</button>
+            <button mat-flat-button color="warn" [routerLink]="'/cart'" [queryParams]="{idProduct: product.idProduct}">Do koszyka</button>
+            <button [routerLink]="['/cart']" [queryParams]="{idProduct: product.idProduct}">inny</button>
         </div>
     </div>
 </div>

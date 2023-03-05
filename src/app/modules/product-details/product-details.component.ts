@@ -44,7 +44,7 @@ export class ProductDetailsComponent implements OnInit {
       this.service.saveProductReview({
         authorName: this.reviewForm.get("authorName")?.value,
         content: this.reviewForm.get("content")?.value,
-        productId: this.product.idProduct
+        idProduct: this.product.idProduct
       } as Review).subscribe(review => {
         this.reviewForm.reset();
         this.snackBar.open("Dziękujemy za dodanie opinii",'', {duration: 3000})

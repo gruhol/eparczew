@@ -8,10 +8,7 @@ import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { AdminpageModule } from './layouts/adminpage/adminpage.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminCategoryAddComponent } from './modules/admin/admin-category/admin-category-add/admin-category-add.component';
-import { AdminCategoryUpdateComponent } from './modules/admin/admin-category/admin-category-update/admin-category-update.component';
-import { CategoryComponent } from './modules/category/category.component';
-
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +22,7 @@ import { CategoryComponent } from './modules/category/category.component';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
