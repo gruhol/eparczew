@@ -1,25 +1,25 @@
 <h1>Koszyk</h1>
 <div *ngIf="summary?.items">
-    <div fxLayout="row" fxLayoutAlign="space-between start" class="card-hrow">
-        <div class="cart-hcol-1">Obraz</div>
-        <div class="cart-hcol-2">Nazwa</div>
-        <div class="cart-hcol-3">Ilość</div>
-        <div class="cart-hcol-4">Wartość</div>
+    <div class="row card-hrow">
+        <div class="col">Obraz</div>
+        <div class="col">Nazwa</div>
+        <div class="col">Ilość</div>
+        <div class="col">Wartość</div>
     </div>
-    <div *ngFor="let item of summary.items" fxLayout="row" fxLayoutAlign="space-between start" class="card-row">
-        <div class="cart-col-1">
+    <div *ngFor="let item of summary.items" class="card-row row">
+        <div class="col">
             <a routerLink="{{'/products/' + item?.product?.slug}}">
                 <img *ngIf="!item.product.image" src="/assets/image-placeholder.png" width="100">
                 <img *ngIf="item.product.image" src="{{'/api/data/productImages/' + item?.product?.image}}" width="100">
             </a>
         </div>
-        <div class="cart-col-2">{{item.product.productName}}</div>
-        <div class="cart-col-3">{{item.quantity}}</div>
-        <div class="cart-col-4">{{item.lineValue}}</div>
+        <div class="col">{{item.product.productName}}</div>
+        <div class="col">{{item.quantity}}</div>
+        <div class="col">{{item.lineValue}}</div>
     </div>
-    <div fxLayoutAlign="end start">
-        <div class="summary"> Wartość: </div>
-        <div class="summary"> <b>{{summary.summary.grossValue}}</b></div>
+    <div class="row">
+        <div class="col summary"> Wartość: </div>
+        <div class="col summary"> <b>{{summary.summary.grossValue}}</b></div>
     </div>
 </div>
 <div *ngIf="!summary?.items">
