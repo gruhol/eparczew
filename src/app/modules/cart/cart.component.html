@@ -1,27 +1,40 @@
 <h1>Koszyk</h1>
-<div *ngIf="summary?.items">
+<form *ngIf="summary?.items?.length" [formGroup]="formGroup">
+<div>
     <div class="row card-hrow">
         <div class="col">Obraz</div>
         <div class="col">Nazwa</div>
         <div class="col">Ilość</div>
         <div class="col">Wartość</div>
+        <div class="col">Usuń</div>
     </div>
-    <div *ngFor="let item of summary.items" class="card-row row">
-        <div class="col">
-            <a routerLink="{{'/products/' + item?.product?.slug}}">
-                <img *ngIf="!item.product.image" src="/assets/image-placeholder.png" width="100">
-                <img *ngIf="item.product.image" src="{{'/api/data/productImages/' + item?.product?.image}}" width="100">
-            </a>
+    <div formGroupName="items">
+        <div *ngFor="let item of items; let i = index">
+            <div [formGroupName]="i" class="card-row row">
+                <div class="col">
+                    <a routerLink="{{'/products/' + item.value.product.slug}}">
+                        <img *ngIf="!item.value.product.image" src="/assets/image-placeholder.png" width="100">
+                        <img *ngIf="item.value.product.image" src="{{'/api/data/productImages/' + item.value.product?.image}}" width="100">
+                    </a>
+                </div>
+                <div class="col">{{item.value.product.productName}}</div>
+                <div class="col"><input formControlName="quantity" class="quantityInput"></div>
+                <div class="col">{{item.value.lineValue}}</div>
+                <div class="col">
+                    <button (click)="deleteItem(item.value.id)">Usuń</button>
+                </div>
+            </div>
         </div>
-        <div class="col">{{item.product.productName}}</div>
-        <div class="col">{{item.quantity}}</div>
-        <div class="col">{{item.lineValue}}</div>
+    </div>
+    <div>
+        <button color="warn" (click)="submit()">Zaaktaulizuj koszyk</button>
     </div>
     <div class="row">
         <div class="col summary"> Wartość: </div>
         <div class="col summary"> <b>{{summary.summary.grossValue}}</b></div>
     </div>
 </div>
-<div *ngIf="!summary?.items">
+</form>
+<div *ngIf="!summary?.items?.length">
     Koszyk jest pusty
 </div>
