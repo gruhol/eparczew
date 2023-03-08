@@ -16,6 +16,7 @@ import { AdminCategoryAddComponent } from './modules/admin/admin-category/admin-
 import { AdminCategoryUpdateComponent } from './modules/admin/admin-category/admin-category-update/admin-category-update.component';
 import { CategoryComponent } from './modules/category/category.component';
 import { CartComponent } from './modules/cart/cart.component';
+import { OrderComponent } from './modules/order/order.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
       {path: 'product', component: ProductComponent},
       {path: 'product/:slug', component: ProductDetailsComponent},
       {path: 'categories/:slug', component: CategoryComponent},
-      {path: 'cart', component: CartComponent}
+      {path: 'cart', component: CartComponent},
+      {path: 'order', component: OrderComponent}
     ]
   },
   {

@@ -33,6 +33,10 @@
         <div class="col summary"> Wartość: </div>
         <div class="col summary"> <b>{{summary.summary.grossValue}}</b></div>
     </div>
+
+    <div>
+        <button type="button" style="margin: auto;" color="warn" routerLink="/order">Zamawiam</button>
+    </div>
 </div>
 </form>
 <div *ngIf="!summary?.items?.length">
