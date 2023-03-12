@@ -11,6 +11,9 @@ CartID: {{cartId}}
     <div>Data złożenia: {{orderSummary.placeDate | date: 'yyyy-MM-dd HH:mm'}}</div>
     <div>Status: {{getStatus(orderSummary.status)}}</div>
     <div>Wartość: {{orderSummary.grossValue}} PLN</div>
+    <div *ngIf="orderSummary.payment.note">Płatność: <br>
+        <span [innerHTML]="orderSummary.payment.note | replace: '\n': '\<br>'"></span>
+    </div>
 </div>
 
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length > 0">
@@ -131,6 +134,15 @@ CartID: {{cartId}}
                             [value]="shipment" [checked]="shipment.defaultShipment">
                                 <span>{{shipment.name}}</span>
                                 <span>{{shipment.price}} PLN</span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <h2>Płatność</h2>
+                        <mat-radio-group formControlName="payment">
+                            <mat-radio-button *ngFor="let payment of initData?.payment" 
+                            [value]="payment" [checked]="payment.defaultPayment">
+                                <span>{{payment.name}}</span>
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
