@@ -1,6 +1,6 @@
 export interface OrderSummary{
     id: number,
     placeDate: Date,
-    status: String,
+    status: string,
     grossValue: number
 }

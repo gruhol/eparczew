@@ -1,14 +1,16 @@
 <h1>Zamówienie</h1>
 
+CartID: {{cartId}}
+
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length <= 0">
     Koszyk jest pusty. Nie możesz zrealizować zamówienia.
 </div>
 
 <div *ngIf="orderSummary">
     <div>Nowe zamówienie o numerze: {{orderSummary.id}}</div>
-    <div>Data złożenia: {{orderSummary.placeDate}}</div>
-    <div>Status: {{orderSummary.status}}</div>
-    <div>Wartość: {{orderSummary.grossValue}}</div>
+    <div>Data złożenia: {{orderSummary.placeDate | date: 'yyyy-MM-dd HH:mm'}}</div>
+    <div>Status: {{getStatus(orderSummary.status)}}</div>
+    <div>Wartość: {{orderSummary.grossValue}} PLN</div>
 </div>
 
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length > 0">
@@ -121,6 +123,22 @@
                     <div style="margin: 30px auto">
                         <div class="summary"> Wartość: </div>
                         <div class="summary"> <b>{{cartSummary.summary.grossValue}}</b></div>
+                    </div>
+                    <div>
+                        <h2>Dostawa</h2>
+                        <mat-radio-group formControlName="shipment">
+                            <mat-radio-button *ngFor="let shipment of initData?.shipment" 
+                            [value]="shipment" [checked]="shipment.defaultShipment">
+                                <span>{{shipment.name}}</span>
+                                <span>{{shipment.price}} PLN</span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <div>
+                            Całkowita kwota do zapłaty: {{cartSummary.summary.grossValue + shipment?.value.price}}
+
+                        </div>
                     </div>
                 </div>
             </div>

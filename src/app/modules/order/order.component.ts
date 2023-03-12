@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CartSummary } from '../common/model/cart/cartSummary';
 import { OrderDto } from './model/orderDto';
-import { OrderSummary } from './model/OrderSummary';
 import { OrderService } from './order.service';
-
+import { OrderSummary } from './model/orderSummary';
+import { InitData } from './model/initData';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -16,7 +16,12 @@ export class OrderComponent implements OnInit {
   cartSummary!: CartSummary;
   formGrup!: FormGroup;
   orderSummary!: OrderSummary;
+  cartId!: Number;
+  initData!: InitData;
 
+  private statuses = new Map<string, string>([
+    ["NEW","Nowe"]
+  ]);
   
   constructor(
     private cookieService: CookieService,
@@ -32,11 +37,15 @@ export class OrderComponent implements OnInit {
       street: ['', Validators.required],
       zipcode: ['', Validators.required],
       city: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      phone: ['', Validators.required]
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      shipment: ['', Validators.required]
     })
+    this.getinitData();
   }
+
   checkCartEmpty() {
+    this.cartId = Number(this.cookieService.get("cartId"));
     let cartId = Number(this.cookieService.get("cartId"));
     this.orderService.getCart(cartId)
       .subscribe(summary => this.cartSummary = summary)
@@ -45,13 +54,39 @@ export class OrderComponent implements OnInit {
   submit() {
     if (this.formGrup.valid){
       this.orderService.placeOrder({
-          
+        firstname: this.formGrup.get('firstname')?.value,
+        lastname: this.formGrup.get('lastname')?.value,
+        street: this.formGrup.get('street')?.value,
+        zipcode: this.formGrup.get('zipcode')?.value,
+        city: this.formGrup.get('city')?.value,
+        email: this.formGrup.get('email')?.value,
+        phone: this.formGrup.get('phone')?.value,
+        cartId: Number(this.cookieService.get("cartId")),
+        shipmentId: Number(this.formGrup.get('shipment')?.value.id)
       } as OrderDto)
         .subscribe(orderSummary => {
           this.orderSummary = orderSummary;
           this.cookieService.delete("cartId");
-        })
+      });
     }
+  }
+
+  getinitData() {
+    this.orderService.getInitData()
+      .subscribe(initData => {
+        this.initData = initData;
+        this.setDefultShipment();
+      })
+  }
+
+  setDefultShipment() {
+    this.formGrup.patchValue({"shipment": this.initData.shipment
+      .filter(shipment => shipment.defaultShipment === true)[0]
+    })
+  }
+
+  getStatus(status: string) {
+    return this.statuses.get(status);
   }
 
   get firstname() {
@@ -80,5 +115,9 @@ export class OrderComponent implements OnInit {
 
   get phone() {
     return this.formGrup.get("phone");
+  }
+
+  get shipment() {
+    return this.formGrup.get("shipment");
   }
 }
