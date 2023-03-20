@@ -149,8 +149,10 @@ CartID: {{cartId}}
                     <div>
                         <div>
                             Całkowita kwota do zapłaty: {{cartSummary.summary.grossValue + shipment?.value.price}}
-
                         </div>
+                    </div>
+                    <div *ngIf="errorMessage">
+                        Coś poszło nie tak.
                     </div>
                 </div>
             </div>
