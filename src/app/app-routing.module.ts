@@ -17,6 +17,9 @@ import { AdminCategoryUpdateComponent } from './modules/admin/admin-category/adm
 import { CategoryComponent } from './modules/category/category.component';
 import { CartComponent } from './modules/cart/cart.component';
 import { OrderComponent } from './modules/order/order.component';
+import { AdminLoginComponent } from './modules/admin/admin-login/admin-login.component';
+import { AdminpageEmptyComponent } from './layouts/adminpageempty/adminpageempty.component';
+import { AdminAuthorizeGuard } from './modules/admin/common/guard/adminAuthorizeGuard';
 
 const routes: Routes = [
   {
@@ -36,13 +39,18 @@ const routes: Routes = [
   },
   {
     path:'', component: AdminpageComponent, children: [
-      {path: 'admin', component: AdminComponent},
-      {path: 'admin/products', component: AdminProductsComponent},
-      {path: 'admin/products/update/:idProduct', component: AdminProductUpdateComponent},
-      {path: 'admin/products/add', component: AdminProductAddComponent},
-      {path: 'admin/categories', component: AdminCategoryComponent},
-      {path: 'admin/categories/add', component: AdminCategoryAddComponent},
-      {path: 'admin/categories/update/:id', component: AdminCategoryUpdateComponent}
+      {path: 'admin', component: AdminComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/products', component: AdminProductsComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/products/update/:idProduct', component: AdminProductUpdateComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/products/add', component: AdminProductAddComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/categories', component: AdminCategoryComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/categories/add', component: AdminCategoryAddComponent, canActivate: [AdminAuthorizeGuard]},
+      {path: 'admin/categories/update/:id', component: AdminCategoryUpdateComponent, canActivate: [AdminAuthorizeGuard]}
+    ]
+  },
+  {
+    path:'', component: AdminpageEmptyComponent, children: [
+      {path: 'admin/login', component: AdminLoginComponent}
     ]
   }
 ];
