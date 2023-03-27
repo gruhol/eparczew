@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginComponent } from 'src/app/modules/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { LoginComponent } from 'src/app/modules/login/login.component';
     CommonModule,
     RouterModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class FullpageModule { }
