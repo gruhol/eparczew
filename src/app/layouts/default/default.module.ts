@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from 'src/app/modules/cart/cart.component';
 import { OrderComponent } from 'src/app/modules/order/order.component';
 import { ReplacePipe } from 'src/app/modules/common/pipe/preplacePipe';
+import { ProfileComponent } from 'src/app/modules/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReplacePipe } from 'src/app/modules/common/pipe/preplacePipe';
     CategoryComponent,
     CartComponent,
     OrderComponent,
-    ReplacePipe
+    ReplacePipe,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

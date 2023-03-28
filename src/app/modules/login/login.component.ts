@@ -11,6 +11,7 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
 
+  private readonly REDIRECT_ROUTE = "/profile";
   loginForm!: FormGroup;
   loginError = false;
   registerError = false;
@@ -25,20 +26,34 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(this.jwtService.isLoggedIn()) {
+      this.router.navigate([this.REDIRECT_ROUTE])
+    }
+
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required, Validators.email],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     })
 
     this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required, Validators.email],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       repeatPassword: ['', Validators.required],
     })
   }
 
   login() {
-  
+    if (this.loginForm.valid) {
+      this.loginService.login(this.registerForm.value)
+      .subscribe({
+        next: response => {
+          this.jwtService.setToken(response.token);
+          this.router.navigate([this.REDIRECT_ROUTE]);
+          this.loginError = false;
+        },
+        error: () => this.loginError = true
+      });
+    }
   }
 
   register() {
@@ -47,7 +62,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: response => {
           this.jwtService.setToken(response.token);
-          this.router.navigate(["/"]);
+          this.router.navigate([this.REDIRECT_ROUTE]);
         },
         error: err => {
           this.registerError = true;
