@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      this.loginService.login(this.registerForm.value)
+      this.loginService.login(this.loginForm.value)
       .subscribe({
         next: response => {
           this.jwtService.setToken(response.token);
