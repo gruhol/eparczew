@@ -6,6 +6,7 @@ import { OrderDto } from './model/orderDto';
 import { OrderService } from './order.service';
 import { OrderSummary } from './model/orderSummary';
 import { InitData } from './model/initData';
+import { JwtService } from '../common/service/jwt.service';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -19,6 +20,7 @@ export class OrderComponent implements OnInit {
   cartId!: Number;
   initData!: InitData;
   errorMessage!: boolean;
+  isLoggedIn!: boolean;
 
   private statuses = new Map<string, string>([
     ["NEW","Nowe"]
@@ -27,7 +29,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private jwtService: JwtService
     ) {}
 
   ngOnInit(): void {
@@ -44,6 +47,7 @@ export class OrderComponent implements OnInit {
       payment: ['', Validators.required]
     })
     this.getinitData();
+    this.isLoggedIn = this.jwtService.isLoggedIn();
   }
 
   checkCartEmpty() {
